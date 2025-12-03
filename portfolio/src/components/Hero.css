@@ -1,0 +1,103 @@
+.hero {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ff69b4;
+  opacity: 0.9;
+  text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+.hero-description {
+  margin-bottom: 2.5rem;
+  opacity: 0.7;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+.hero-btn {
+  margin-top: 1.5rem;
+  position: relative;
+  will-change: transform;
+  box-shadow: 0 10px 40px rgba(255, 105, 180, 0.3);
+}
+
+.hero-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.hero-btn:hover::after {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0;
+}
+
+.char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shape {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.2) 0%, rgba(218, 112, 214, 0.15) 100%);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 105, 180, 0.4);
+  filter: blur(1px);
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+  will-change: transform;
+}
+
+.grid-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: 
+    linear-gradient(rgba(255, 105, 180, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 105, 180, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}

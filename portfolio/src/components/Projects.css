@@ -1,0 +1,141 @@
+.projects {
+  text-align: center;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+  max-width: 1200px;
+  width: 100%;
+  perspective: 2000px;
+}
+
+.project-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+  text-decoration: none;
+  display: block;
+}
+
+.vinyl-disc {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    #1a0f2e 0%,
+    #0a0514 30%,
+    #1a0f2e 31%,
+    #0a0514 32%,
+    #1a0f2e 60%,
+    #0a0514 61%,
+    #1a0f2e 62%,
+    #2a1f3e 100%
+  );
+  box-shadow: 
+    0 0 0 8px rgba(255, 105, 180, 0.2),
+    0 20px 60px rgba(255, 105, 180, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.vinyl-disc::before {
+  content: '';
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff69b4 0%, #ff1493 50%, #0a0514 100%);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+}
+
+.vinyl-disc::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 105, 180, 0.03) 1deg,
+    transparent 2deg
+  );
+  animation: rotate 8s linear infinite;
+  pointer-events: none;
+}
+
+.project-card:hover .vinyl-disc::after {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-label {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.9) 0%, rgba(255, 20, 147, 0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  z-index: 2;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.project-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.vinyl-label h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.vinyl-label p {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.vinyl-grooves {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0px,
+    rgba(255, 105, 180, 0.05) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
