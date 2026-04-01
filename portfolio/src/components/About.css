@@ -92,14 +92,14 @@
 
 @media (max-width: 768px) {
   .tech-map-section {
-    min-height: 110vh; /* slightly more room on mobile to stack linearly */
+    min-height: 140vh; /* slightly more room on mobile to stack linearly */
   }
   .skill-bubble {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
   .bubble-label {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
