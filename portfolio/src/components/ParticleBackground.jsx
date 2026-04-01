@@ -1,48 +1,50 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import './ParticleBackground.css';
 
-const ParticleBackground = () => {
-  const [particles, setParticles] = useState([]);
+const BubbleBackground = () => {
+  const containerRef = useRef(null);
+  const bubblesRef = useRef([]);
 
   useEffect(() => {
-    const particleCount = 30;
-    const newParticles = Array.from({ length: particleCount }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 1,
-      duration: Math.random() * 20 + 10,
-      delay: Math.random() * 5,
-    }));
-    setParticles(newParticles);
+    const ctx = gsap.context(() => {
+      bubblesRef.current.forEach((bubble, i) => {
+        gsap.to(bubble, {
+          y: `${-20 + Math.random() * -100}vh`,
+          x: `${-50 + Math.random() * 100}vw`,
+          duration: 15 + Math.random() * 15,
+          yoyo: true,
+          repeat: -1,
+          ease: 'power1.inOut',
+          delay: gsap.utils.random(-10, 0)
+        });
+      });
+    }, containerRef);
+    return () => ctx.revert();
   }, []);
 
+  const handleMouseEnter = (e) => {
+    gsap.to(e.target, { scale: 1.12, duration: 0.3, ease: 'power2.out', opacity: 0.9 });
+  };
+  
+  const handleMouseLeave = (e) => {
+    gsap.to(e.target, { scale: 1, duration: 0.5, ease: 'power2.out', opacity: 0.6 });
+  };
+
   return (
-    <div className="particle-background">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="particle"
-          initial={{ 
-            x: `${particle.x}vw`, 
-            y: `${particle.y}vh`,
-            opacity: 0 
-          }}
-          animate={{
-            x: [`${particle.x}vw`, `${particle.x + 20}vw`, `${particle.x}vw`],
-            y: [`${particle.y}vh`, `${particle.y - 30}vh`, `${particle.y}vh`],
-            opacity: [0, 0.6, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
+    <div className="bubble-container" ref={containerRef}>
+      {Array.from({ length: 15 }).map((_, i) => (
+        <div
+          key={i}
+          className="bubble"
+          ref={el => bubblesRef.current[i] = el}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           style={{
-            width: particle.size,
-            height: particle.size,
+            left: `${Math.random() * 100}vw`,
+            top: `${Math.random() * 100}vh`,
+            width: `${Math.random() * 100 + 50}px`,
+            height: `${Math.random() * 100 + 50}px`
           }}
         />
       ))}
@@ -50,4 +52,4 @@ const ParticleBackground = () => {
   );
 };
 
-export default ParticleBackground;
+export default BubbleBackground;
